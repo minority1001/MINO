@@ -1,6 +1,4 @@
-//MegaMedusa-DDoS-Machine
-//Github: TrashDono
-//Telegram: RipperSec
+
 const net = require('net');
 const http2 = require("http2");
 const tls = require('tls');
@@ -15,16 +13,8 @@ process.setMaxListeners(0);
 require("events").EventEmitter.defaultMaxListeners = 0;
 process.on('uncaughtException', function (err) {});
 
-if (process.argv.length < 7) {
-    console.log(" █▀▄▀█ █▀▀ █▀▀▄ █──█ █▀▀ █▀▀█ █▀▀▄ █▀▀▄ █▀▀█ █▀▀ ");
-    console.log(" █─▀─█ █▀▀ █──█ █──█ ▀▀█ █▄▄█ █──█ █──█ █──█ ▀▀█ ");
-    console.log(" ▀───▀ ▀▀▀ ▀▀▀─ ─▀▀▀ ▀▀▀ ▀──▀ ▀▀▀─ ▀▀▀─ ▀▀▀▀ ▀▀▀ ");
-    console.log(" ╚═════╦════════════════════════════════════════════╦═════╝ ");
-    console.log(" ║ Author : TrashDono ║ ");
-    console.log(" ║ Github : https://github.com/TrashDono ║ ");
-    console.log(" ║ Telegram : https://t.me/RipperSec ║ ");
-    console.log(" ╚════════════════════════════════════════════╝");
-    console.log(" node Medusa <HOST> <TIME> <RPS> <THREADS> <PROXY>.");
+if (process.argv.length < 
+    console.log(" node mino.js  <HOST> <TIME> <RPS> <THREADS> <PROXY>.");
     process.exit();
 }
 
