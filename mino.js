@@ -14,7 +14,7 @@ require("events").EventEmitter.defaultMaxListeners = 0;
 process.on('uncaughtException', function (err) {});
 
 if (process.argv.length < 
-    console.log(" node mino.js  <HOST> <TIME> <RPS> <THREADS> <PROXY>.");
+    console.log(" node mino.js  <HOST> <TIME> <RPS> <THREADS> <PROXY>."
     process.exit();
 }
 
