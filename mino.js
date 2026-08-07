@@ -102,11 +102,11 @@ const args = {
 const os = require('os');
 if (cluster.isMaster) {
     // Tampilkan informasi tanpa banner
-    console.log(" Target 🌐 : " + process.argv[2]);
-    console.log(" Time ⏳ : " + process.argv[3]);
-    console.log(" Rate 💣 : " + process.argv[4]);
-    console.log(" Thread ⚙️ : " + process.argv[5]);
-    console.log(" ProxyFile 📘 : " + process.argv[6]);
+    console.log("  🎯 : " + process.argv[2]);
+    console.log("  ⏱️ : " + process.argv[3]);
+    console.log("  🚀 : " + process.argv[4]);
+    console.log("  ⚙️ : " + process.argv[5]);
+    console.log("  📘 : " + process.argv[6]);
 
     for (let i = 1; i <= process.argv[5]; i++) {
         cluster.fork();
