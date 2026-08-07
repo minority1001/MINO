@@ -21,7 +21,7 @@ function getTimestamp() {
 }
 
 if (process.argv.length < 7) {
-    console.log(" node mino.js  <HOST> <TIME> <RPS> <THREADS> <PROXY>.");
+    console.log(" node mino.js  url time rps threads proxy");
     process.exit();
 }
 
@@ -102,11 +102,11 @@ const args = {
 const os = require('os');
 if (cluster.isMaster) {
     // Tampilkan informasi tanpa banner
-    console.log("-> Target ⚡️ : " + process.argv[2]);
-    console.log("-> Time ⏳ : " + process.argv[3]);
-    console.log("-> Rate 💣 : " + process.argv[4]);
-    console.log("-> Thread ⚙️ : " + process.argv[5]);
-    console.log("-> ProxyFile 🗃 : " + process.argv[6]);
+    console.log(" Target 🌐 : " + process.argv[2]);
+    console.log(" Time ⏳ : " + process.argv[3]);
+    console.log(" Rate 💣 : " + process.argv[4]);
+    console.log(" Thread ⚙️ : " + process.argv[5]);
+    console.log(" ProxyFile 📘 : " + process.argv[6]);
 
     for (let i = 1; i <= process.argv[5]; i++) {
         cluster.fork();
@@ -114,7 +114,7 @@ if (cluster.isMaster) {
     }
     setInterval(getStatus, 2000);
     setTimeout(() => {
-        console.log("[" + getTimestamp() + "] -> Attack Successful ✅");
+        console.log("[" + getTimestamp() + "] -> Attack Successful 🚀");
         process.exit(1);
     }, process.argv[3] * 1000);
 } else {
